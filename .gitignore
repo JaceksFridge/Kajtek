@@ -1,0 +1,46 @@
+
+
+server/secret.py
+server/venv/
+
+
+.DS_Store
+server/secret.py
+node_modules/
+server/venv/
+*.pyc
+__pycache__/
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
