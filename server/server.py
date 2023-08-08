@@ -1,5 +1,5 @@
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from openapi import gpt_connect
 
@@ -8,20 +8,30 @@ from openapi import gpt_connect
 app = Flask(__name__)
 CORS(app)
 
+
+
+@app.route("/api/prompt", methods=['POST'])
+def user_prompt():
+    before_prompt = request.json['prompt']
+    print('before prompt:', before_prompt, type(before_prompt))
     
-data = gpt_connect()
+    # parse dict into str
+    
+    # calling gpt with prompt
+    after_prompt = gpt_connect(before_prompt)
 
+    # res object to client side
+    response = {
+        'received_data': before_prompt,
+        'prompted_data': after_prompt
+    }
 
-# api/home
-@app.route("/api/home", methods=['GET'])
-def return_home():
-    return jsonify({
-        'message': data,
-    })
+    print(" [[[[[ success: receiving before prompt ]]]]] ", type(after_prompt))
+    return jsonify(response)
 
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
     
     
-    
+

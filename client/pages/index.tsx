@@ -3,27 +3,62 @@ import React, { useState, useEffect } from 'react'
 function index() {
 
   const [mes, setMes] = useState("Loading")
+  const [input, setInput] = useState("")
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/home")
-    .then(
-      response => response.json()
-    ).then((data) => {
-      console.log(data)
-      setMes(data.message)
-    })
-  }, [])
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch("http://localhost:8080/api/prompt", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt: input })
+      })
+      console.log('successfully posted data')
+
+      // server respnonse
+      const data = await response.json()
+      setMes(data.prompted_data)
+      console.log('successfully received data:', mes)
+
+    } catch (error) {
+      console.error("Failed to send Form ->", error)
+    }
+  }
 
 
   return (
     <div className="app">
       <div className="input-block">
-        <form action="post">
+        <form onSubmit={handleSubmit}>
           <label htmlFor="prompt"></label>
-          <input type="text" name="prompt" />
+          <input 
+            type="text" 
+            name="prompt" 
+            value={input}
+            onChange={handleInput}
+          />
+          <p>{input}</p>
+          <button 
+            className="submit-btn"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
       </div>
-      <h1>{mes}</h1>
+      <h1>Hi</h1>
+      <div className="result">
+        <p className="result-text">
+          {mes}
+        </p>
+      </div>
     </div>
   )
 }

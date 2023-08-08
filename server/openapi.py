@@ -7,13 +7,13 @@ key = OPEN_KEY
 openai.api_key = key
 
 
-def gpt_connect():
+def gpt_connect(before_prompt):
 
-    prompt = input(" bitch write prompt")
+    prompt = before_prompt
     
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        message=[{
+        messages=[{
             "role": "user",
             "content": prompt
         }],
@@ -22,6 +22,5 @@ def gpt_connect():
     )
     
     output = response['choices'][0]['message']['content']
-    print("generated output")
-    print(output)
+    print(" [[[[[ generated output ]]]]] ")
     return output
