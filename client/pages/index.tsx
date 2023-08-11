@@ -53,7 +53,7 @@ function index() {
           </button>
         </form>
       </div>
-      <h1>Hi</h1>
+      <h1 className="text-5xl text-blue-700">Hi</h1>
       <div className="result">
         <p className="result-text">
           {mes}
