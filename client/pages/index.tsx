@@ -5,6 +5,9 @@ import ButtonIcon from '../components/ButtonIcon'
 import Sidebar from '../components/sidebar'
 import IconSidebar from '@/icons/IconSidebar'
 import IconArrow from '@/icons/IconArrow'
+import IconModeBug from '@/icons/IconModeBug'
+import IconModeExplain from '@/icons/iconModeExplain'
+import IconModeRefractor from '@/icons/IconModeRefractor'
 
 function index() {
 
@@ -89,27 +92,38 @@ function index() {
           </motion.div>
             <div 
               onClick={() => toggleSwitch("one")}
-              className="selected-mode flex-1 grid place-items-center z-10"
-              >Bug</div>
+              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
+              >
+                <div><IconModeBug /></div>
+                <div>Bug</div>
+              </div>
             <div 
               onClick={() => toggleSwitch("two")}
-              className="selected-mode flex-1 grid place-items-center z-10"
-            >Explain</div>
+              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
+            >
+              <div><IconModeExplain /></div>
+              <div>Explain</div>
+            </div>
             <div 
               onClick={() => toggleSwitch("three")}
-              className="selected-mode flex-1 grid place-items-center z-10"
-            >Refractor</div>
+              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
+            >
+              <div><IconModeRefractor /></div>
+              <div>Refractor</div>
+            </div>
           </div>
         </div>
         <div id="prompt-container" className="mb-12 w-full flex justify-center">
-          <form id="prompt-bar" className="bg-light-green px-6 w-3/5 h-auto flex justify-between items-center rounded-2xl">
+          <form id="prompt-bar" className="bg-light-green px-6 py-4 w-3/5 flex justify-between items-center rounded-2xl">
             <textarea 
               name="prompt" 
               id="prompt-block" 
-              className="bg-transparent w-full min-h-[40px] max-h-[200px] overflow-y-auto resize-none outline-none p-2"
+              className="bg-transparent w-full min-h-[16px] max-h-[200px] h-6 outline-none resize-none"
               placeholder="Enter a prompt ..."
             ></textarea>
-            <button className="h-4 w-4">
+            <button 
+              className="h-4 w-4"
+            >
               <IconArrow />
             </button>
           </form>
