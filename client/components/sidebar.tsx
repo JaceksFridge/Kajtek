@@ -48,15 +48,39 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebar, toggleSidebar }) => {
                 <ButtonBoth icon={IconPlus} text="New Chat"/>
                 <ButtonIcon icon={IconSidebar} text="Close sidebar" onClick={toggleSidebar} />
             </motion.div>
-            <div id="history" className="">
+            <div id="history" className="multiline-ellipsis">
                 <h3 className="my-4 text-xs">Recents</h3>
-                <div id="history-card" className="h-28 w-full p-4 bg-white rounded-lg">
-                    <div id="history-card-top">
+                <div id="history-card" className="h-28 w-full mb-2 p-4 rounded-lg overflow-hidden cursor-pointer hover:bg-white">
+                    <div id="history-card-top" className="mb-2 flex items-center gap-2">
                         <IconChat />
-                        <h4>How to plant a carrot?</h4>
+                        <h4 className="text-sm">How to plant a carrot?</h4>
                     </div>
-                    <div id="history-text" className="text-xs text-ellipsis overflow-hidden">Here are a few steps on how to plant a carrot in your garden: Chose the right location. 
-                    Carrots need full sun and well-drained soil ...</div>
+                    <p id="history-text" className="text-xs multiline-ellipsis">
+                        Here are a few steps on how to plant a carrot in your garden: Chose the right location. 
+                        Carrots need full sun and well-drained soil ...
+                    </p>
+                    <div id="history-bin"></div>
+                </div>
+                <div id="history-card" className="h-28 w-full mb-2 p-4 rounded-lg overflow-hidden cursor-pointer hover:bg-white">
+                    <div id="history-card-top" className="mb-2 flex items-center gap-2">
+                        <IconChat />
+                        <h4 className="text-sm">How to plant a carrot?</h4>
+                    </div>
+                    <p id="history-text" className="text-xs multiline-ellipsis">
+                        Here are a few steps on how to plant a carrot in your garden: Chose the right location. 
+                        Carrots need full sun and well-drained soil ...
+                    </p>
+                    <div id="history-bin"></div>
+                </div>
+                <div id="history-card" className="h-28 w-full mb-2 p-4 rounded-lg overflow-hidden cursor-pointer hover:bg-white">
+                    <div id="history-card-top" className="mb-2 flex items-center gap-2">
+                        <IconChat />
+                        <h4 className="text-sm">How to plant a carrot?</h4>
+                    </div>
+                    <p id="history-text" className="text-xs multiline-ellipsis">
+                        Here are a few steps on how to plant a carrot in your garden: Chose the right location. 
+                        Carrots need full sun and well-drained soil ...
+                    </p>
                     <div id="history-bin"></div>
                 </div>
             </div>

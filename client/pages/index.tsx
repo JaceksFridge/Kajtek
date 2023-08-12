@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import ButtonIcon from '../components/ButtonIcon'
 import Sidebar from '../components/sidebar'
 import IconSidebar from '@/icons/IconSidebar'
-
+import IconArrow from '@/icons/IconArrow'
 
 function index() {
 
@@ -70,9 +70,9 @@ function index() {
         <ButtonIcon icon={IconSidebar} text="Open sidebar" onClick={toggleSidebar} />
       </div>
       
-      <div id="main" className={sidebar ? "w-full bg-white" : "w-full bg-white"}>
-        <div id="mode-container" className="w-full h-full flex justify-center items-center">
-          <div id="mode-switch" data-isOn={mode} className="relative w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
+      <div id="main" className="w-full bg-white flex flex-col items-center justify-between">
+        <div id="mode-container" className="w-full flex flex-col justify-between items-center">
+          <div id="mode-switch" data-isOn={mode} className="relative mt-8 w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
             <motion.div 
             className="absolute w-1/3 h-full p-1"
             layout
@@ -100,6 +100,21 @@ function index() {
               className="selected-mode flex-1 grid place-items-center z-10"
             >Refractor</div>
           </div>
+        </div>
+        <div id="prompt-container" className="mb-12 w-full flex justify-center">
+          <form id="prompt-bar" className="bg-light-green px-4 w-3/5 h-auto flex justify-between items-center rounded-2xl">
+            <textarea 
+              name="prompt" 
+              id="prompt-block" 
+              cols="30" 
+              rows="10" 
+              className="bg-transparent w-full h-14"
+              placeholder="Enter a prompt ..."
+            ></textarea>
+            <button className="h-4 w-4">
+              <IconArrow />
+            </button>
+          </form>
         </div>
       </div>
 

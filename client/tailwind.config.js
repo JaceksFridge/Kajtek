@@ -9,8 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
         'light-green': '#EAF1F1',
@@ -21,9 +20,17 @@ module.exports = {
         'light-green-300': 'rgba(234, 241, 241, 0.3)',
         'light-green-200': 'rgba(234, 241, 241, 0.2)'
       }
-    },
+    }
   },
   plugins: [],
+  extend: {
+    utilities: {
+      '.multiline-ellipsis': {
+        display: '-webkit-box',
+        overflow: 'hidden',
+        '-webkit-line-clamp': 2,
+        '-webkit-box-orient': 'vertical'
+      }
+    }
+  }
 }
-
-
