@@ -77,7 +77,7 @@ function index() {
       </button>
       <div id="main" className={sidebar ? "w-full bg-white" : "w-full bg-white"}>
         <div id="mode-container" className="w-full h-full flex justify-center items-center">
-          <div id="mode-switch" data-isOn={mode} className="relative w-1/3 h-14 flex bg-light-green rounded-2xl">
+          <div id="mode-switch" data-isOn={mode} className="relative w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
             <motion.div 
             className="absolute w-1/3 h-full p-1"
             layout

@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import ButtonIcon from './ButtonIcon'
 
+import IconSidebar from '@/icons/IconSidebar'
 
 interface SidebarProps{
     sidebar: boolean
@@ -21,13 +23,16 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebar }) => {
 
     return (
         <motion.div 
-        id="sidebar" 
-        className="grid place-items-center bg-blue-200"
-        initial={false}
-        animate={sidebar ? 'visible' : 'hidden'}
-        variants={sidebarVariants}
+            id="sidebar" 
+            className="p-4 bg-blue-200 flex flex-col justify-start"
+            initial={false}
+            animate={sidebar ? 'visible' : 'hidden'}
+            variants={sidebarVariants}
         >
-        Sidemenu
+            <div id="top-buttons" className="bg-blue-500 w-full flex flex-row justify-end gap-2">
+                <ButtonIcon icon={IconSidebar} />
+                <ButtonIcon icon={IconSidebar} />
+            </div>
         </motion.div>
     )
 }
