@@ -5,6 +5,7 @@ import ButtonIcon from '../components/ButtonIcon'
 import Sidebar from '../components/sidebar'
 import IconSidebar from '@/icons/IconSidebar'
 import IconArrow from '@/icons/IconArrow'
+import IconInfo from '@/icons/IconInfo'
 import IconModeBug from '@/icons/IconModeBug'
 import IconModeExplain from '@/icons/iconModeExplain'
 import IconModeRefractor from '@/icons/IconModeRefractor'
@@ -74,6 +75,9 @@ function index() {
       </div>
       
       <div id="main" className="w-full bg-white flex flex-col items-center justify-between">
+        <div id="button-container" className="absolute top-4 right-4">
+          <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={() => console.log("Hello")}/>
+        </div>
         <div id="mode-container" className="w-full flex flex-col justify-between items-center">
           <div id="mode-switch" data-isOn={mode} className="relative mt-8 w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
             <motion.div 
