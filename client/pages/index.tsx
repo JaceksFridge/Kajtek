@@ -102,13 +102,11 @@ function index() {
           </div>
         </div>
         <div id="prompt-container" className="mb-12 w-full flex justify-center">
-          <form id="prompt-bar" className="bg-light-green px-4 w-3/5 h-auto flex justify-between items-center rounded-2xl">
+          <form id="prompt-bar" className="bg-light-green px-6 w-3/5 h-auto flex justify-between items-center rounded-2xl">
             <textarea 
               name="prompt" 
               id="prompt-block" 
-              cols="30" 
-              rows="10" 
-              className="bg-transparent w-full h-14"
+              className="bg-transparent w-full min-h-[40px] max-h-[200px] overflow-y-auto resize-none outline-none p-2"
               placeholder="Enter a prompt ..."
             ></textarea>
             <button className="h-4 w-4">
