@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
+import Sidebar from '../components/sidebar'
+
+
 function index() {
 
   const [mes, setMes] = useState("Loading")
@@ -40,14 +43,7 @@ function index() {
     setSideBar(!sidebar)
   }
 
-  const sidebarVariants = {
-    hidden: {
-      width: 0
-    },
-    visible: {
-      width: "20%"
-    }
-  }
+
 
 
 
@@ -69,15 +65,7 @@ function index() {
 
   return (
     <div className="w-full h-screen bg-white flex">
-    <motion.div 
-      id="sidebar" 
-      className="grid place-items-center bg-blue-200"
-      initial={false}
-      animate={sidebar ? 'visible' : 'hidden'}
-      variants={sidebarVariants}
-    >
-      Sidemenu
-    </motion.div>
+      <Sidebar sidebar={sidebar} />
       <button 
         id="sidbar-button"
         onClick={toggleSidebar}
