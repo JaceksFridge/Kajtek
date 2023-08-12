@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
+import ButtonIcon from '../components/ButtonIcon'
 import Sidebar from '../components/sidebar'
+import IconSidebar from '@/icons/IconSidebar'
 
 
 function index() {
@@ -46,8 +48,6 @@ function index() {
 
 
 
-
-
   // all mode settings:
   const [mode, setMode] = useState<string>("one")
 
@@ -64,17 +64,12 @@ function index() {
 
 
   return (
-    <div className="w-full h-screen bg-white flex">
-      <Sidebar sidebar={sidebar} />
-      <button 
-        id="sidbar-button"
-        onClick={toggleSidebar}
-        className="absolute top-4 left-4 w-11 h-11 bg-white grid place-items-center rounded-lg hidden">
-        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" className="h-4 w-4 text-white dark:text-black" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="9" y1="3" x2="9" y2="21"></line>
-        </svg>
-      </button>
+    <div className="relative w-full h-screen bg-white flex">
+      <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar}/>
+      <div id="button-container" className={`${sidebar ? 'hidden' : 'visible'} absolute top-4 left-4`}>
+        <ButtonIcon icon={IconSidebar} text="Open sidebar" onClick={toggleSidebar} />
+      </div>
+      
       <div id="main" className={sidebar ? "w-full bg-white" : "w-full bg-white"}>
         <div id="mode-container" className="w-full h-full flex justify-center items-center">
           <div id="mode-switch" data-isOn={mode} className="relative w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
