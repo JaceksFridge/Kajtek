@@ -18,7 +18,9 @@ module.exports = {
         'light-green-500': 'rgba(234, 241, 241, 0.5)',
         'light-green-400': 'rgba(234, 241, 241, 0.4)',
         'light-green-300': 'rgba(234, 241, 241, 0.3)',
-        'light-green-200': 'rgba(234, 241, 241, 0.2)'
+        'light-green-200': 'rgba(234, 241, 241, 0.2)',
+
+        'border-gray': '#D8DEDE'
       }
     }
   },

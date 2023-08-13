@@ -6,6 +6,8 @@ import Sidebar from '../components/sidebar'
 import IconSidebar from '@/icons/IconSidebar'
 import IconArrow from '@/icons/IconArrow'
 import IconInfo from '@/icons/IconInfo'
+import IconAbout from '@/icons/IconAbout'
+import IconKeyboard from '@/icons/IconKeyboard'
 import IconModeBug from '@/icons/IconModeBug'
 import IconModeExplain from '@/icons/iconModeExplain'
 import IconModeRefractor from '@/icons/IconModeRefractor'
@@ -67,6 +69,17 @@ function index() {
   }
 
 
+  // info menu
+
+  const [infoMenu, setInfoMenu] = useState(false)
+
+  const toggleInfoMenu = () => {
+    setInfoMenu(!infoMenu)
+  }
+
+
+
+  
   return (
     <div className="relative w-full h-screen bg-white flex">
       <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar}/>
@@ -75,8 +88,22 @@ function index() {
       </div>
       
       <div id="main" className="w-full bg-white flex flex-col items-center justify-between">
+        {infoMenu ? (
+          <div id="info-menu" className="absolute h-24 w-48 border border-gray top-20 right-16 rounded-lg">
+            <div id="about-tab" className="w-full h-1/2 px-4 flex justify-start items-center gap-2 hover:bg-light-green cursor-pointer">
+              <IconAbout />
+              <div className="text-sm">About this project</div>
+            </div>
+            <div id="keyboard-tab" className="w-full h-1/2 px-4 flex justify-start items-center gap-2 hover:bg-light-green cursor-pointer">
+              <IconKeyboard />
+              <div className="text-sm">Keyboard shortcuts</div>
+            </div>
+          </div>
+        ) : (
+          null
+        )}
         <div id="button-container" className="absolute top-4 right-4">
-          <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={() => console.log("Hello")}/>
+          <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={toggleInfoMenu}/>
         </div>
         <div id="mode-container" className="w-full flex flex-col justify-between items-center">
           <div id="mode-switch" data-isOn={mode} className="relative mt-8 w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
