@@ -3,6 +3,9 @@ import { motion } from 'framer-motion'
 
 import ButtonIcon from '../components/ButtonIcon'
 import Sidebar from '../components/sidebar'
+import KeyShorts from '@/components/KeyShorts'
+
+
 import IconSidebar from '@/icons/IconSidebar'
 import IconArrow from '@/icons/IconArrow'
 import IconInfo from '@/icons/IconInfo'
@@ -11,13 +14,15 @@ import IconKeyboard from '@/icons/IconKeyboard'
 import IconModeBug from '@/icons/IconModeBug'
 import IconModeExplain from '@/icons/iconModeExplain'
 import IconModeRefractor from '@/icons/IconModeRefractor'
+import IconProfile from '@/icons/IconProfile'
+import IconPlus from '@/icons/iconPlus'
 
 function index() {
 
   const [mes, setMes] = useState("Loading")
   const [input, setInput] = useState("")
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value)
   }
 
@@ -82,9 +87,40 @@ function index() {
         }
     }
     setInfoMenu(!infoMenu);
-}
+  }
 
 
+  // outupt
+  const [output, setOutput] = useState(false)
+  const [bin, setBin] = useState(false)
+
+  const showBin = (e: any) => {
+    setBin(!bin)
+  }
+
+
+  // modes
+
+  const [modeMenu, setModeMenu] = useState(false)
+
+  const toggleModeMenu = (e: any) => {
+    setModeMenu(!modeMenu)
+  }
+
+  const modes = {
+    "bug": "icon",
+    "explain": "icon",
+    "refractor": "icon"
+  }
+
+
+  // Keyboard Shortcuts
+
+  const [keyShorts, setKeyShorts] = useState(false)
+
+  const toggleKeyShorts = () => {
+    setKeyShorts(!keyShorts)
+  }
 
 
   return (
@@ -103,19 +139,34 @@ function index() {
             </div>
             <div id="keyboard-tab" className="w-full h-1/2 px-4 flex justify-start items-center gap-2 hover:bg-light-green cursor-pointer">
               <IconKeyboard />
-              <div className="text-sm">Keyboard shortcuts</div>
+              <div className="text-sm" onClick={toggleKeyShorts}>Keyboard shortcuts</div>
             </div>
           </div>
         ) : (
           null
         )}
+        {keyShorts ? ( <KeyShorts /> ) : null }
         <div id="button-info" className={"absolute top-4 right-4"}>
           <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={toggleInfoMenu}/>
         </div>
         <div id="mode-container" className="w-full flex flex-col justify-between items-center">
+          <div id="mode-btn">
+            <button
+              onClick={toggleModeMenu}
+            >mode</button>
+            {modeMenu ? (
+            <div id="mode-menu" className="aboslute z-20 w-40 h-52">
+              <div>bug</div>
+              <div>explain</div>
+              <div>refractor</div>
+            </div>
+            ) : (
+              null
+            )}
+          </div>
           <div id="mode-switch" data-isOn={mode} className="relative mt-8 w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
             <motion.div 
-            className="absolute w-1/3 h-full p-1"
+            className="absolute z-10 w-1/3 h-full p-1"
             layout
             transition={spring}
             animate={{ 
@@ -151,15 +202,48 @@ function index() {
             </div>
           </div>
         </div>
+        {output ? (
+            <div 
+            id="output-container"
+            className="w-3/5 h-auto"
+          >
+            <div id="output-block">
+              <div 
+                id="question-block"
+                onClick={showBin}
+                className="relative bg-light-green w-full h-14 px-6 py-4 flex items-center gap-6 rounded-2xl"
+              >
+                <IconProfile />
+                <p id="user-question">How to plant a carrot?</p>
+                {bin ? (
+                  <div id="bin-icon" className="absolute right-6">
+                    <IconPlus />
+                  </div>
+                ) : (
+                  null
+                )}  
+              </div>
+              <div id="answer-block"></div>
+            </div>
+          </div>
+        ) : null }
         <div id="prompt-container" className="mb-12 w-full flex justify-center">
-          <form id="prompt-bar" className="bg-light-green px-6 py-4 w-3/5 flex justify-between items-center rounded-2xl">
+          <form 
+            id="prompt-bar" 
+            className="bg-light-green px-6 py-4 w-3/5 flex justify-between items-center rounded-2xl"
+            onSubmit={handleSubmit}
+          >
             <textarea 
               name="prompt" 
-              id="prompt-block" 
+              id="prompt-block"
+              value={input}
+              onChange={handleInput}
               className="bg-transparent w-full min-h-[16px] max-h-[200px] h-6 outline-none resize-none"
               placeholder="Enter a prompt ..."
             ></textarea>
             <button 
+              id="submit-btn"
+              type="submit"
               className="h-4 w-4"
             >
               <IconArrow />

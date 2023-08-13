@@ -20,7 +20,9 @@ module.exports = {
         'light-green-300': 'rgba(234, 241, 241, 0.3)',
         'light-green-200': 'rgba(234, 241, 241, 0.2)',
 
-        'border-gray': '#D8DEDE'
+        'border-gray': '#D8DEDE',
+
+        'h-18': '4.5rem'
       }
     }
   },
