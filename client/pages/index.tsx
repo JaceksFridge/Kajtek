@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 import ButtonIcon from '../components/ButtonIcon'
@@ -74,12 +74,19 @@ function index() {
   const [infoMenu, setInfoMenu] = useState(false)
 
   const toggleInfoMenu = () => {
-    setInfoMenu(!infoMenu)
-  }
+    if (typeof window !== 'undefined') {
+        const info = document.querySelector("#button-info #icon-btn");
+
+        if (info) {
+            info.classList.toggle('bg-light-green');
+        }
+    }
+    setInfoMenu(!infoMenu);
+}
 
 
 
-  
+
   return (
     <div className="relative w-full h-screen bg-white flex">
       <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar}/>
@@ -102,7 +109,7 @@ function index() {
         ) : (
           null
         )}
-        <div id="button-container" className="absolute top-4 right-4">
+        <div id="button-info" className={"absolute top-4 right-4"}>
           <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={toggleInfoMenu}/>
         </div>
         <div id="mode-container" className="w-full flex flex-col justify-between items-center">
