@@ -18,7 +18,11 @@ def user_prompt():
     # parse dict into str
     
     # calling gpt with prompt
-    after_prompt = gpt_connect(before_prompt)
+    
+    try:
+        after_prompt = gpt_connect(before_prompt)
+    except:
+        after_prompt = "prompt output not found"
 
     # res object to client side
     response = {

@@ -1,19 +1,16 @@
 import React, { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
 
-import ButtonIcon from '../components/ButtonIcon'
-import Sidebar from '../components/sidebar'
-import KeyShorts from '@/components/KeyShorts'
-
+import ButtonIcon from '@/components/ButtonIcon'
+import Sidebar from '@/components/sidebar'
+import KeyModal from '@/components/KeyModal'
+import AboutModal from '@/components/AboutModal'
+import ModeSwitch from '@/components/ModeSwitch'
+import MenuInfo from '@/components/MenuInfo'
+import PromptForm from '@/components/PromptForm'
+import Overlay from '@/components/Overlay'
 
 import IconSidebar from '@/icons/IconSidebar'
-import IconArrow from '@/icons/IconArrow'
 import IconInfo from '@/icons/IconInfo'
-import IconAbout from '@/icons/IconAbout'
-import IconKeyboard from '@/icons/IconKeyboard'
-import IconModeBug from '@/icons/IconModeBug'
-import IconModeExplain from '@/icons/iconModeExplain'
-import IconModeRefractor from '@/icons/IconModeRefractor'
 import IconProfile from '@/icons/IconProfile'
 import IconPlus from '@/icons/iconPlus'
 
@@ -49,33 +46,23 @@ function index() {
     }
   }
 
-  // sidebar settings
-  const [sidebar, setSideBar] = useState<boolean>(true)
+
+  // Sidebar
+  const [sidebar, setSideBar] = useState<boolean>(false)
 
   const toggleSidebar = () => {
     setSideBar(!sidebar)
   }
 
 
-
-
   // all mode settings:
   const [mode, setMode] = useState<string>("one")
-
   const toggleSwitch = (activeTab: string) => {
     setMode(activeTab)
   }
 
 
-  const spring = {
-    type: "spring",
-    stiffness: 700,
-    damping: 30
-  }
-
-
-  // info menu
-
+  // MenuInfo
   const [infoMenu, setInfoMenu] = useState(false)
 
   const toggleInfoMenu = () => {
@@ -90,7 +77,7 @@ function index() {
   }
 
 
-  // outupt
+  // Output
   const [output, setOutput] = useState(false)
   const [bin, setBin] = useState(false)
 
@@ -99,8 +86,7 @@ function index() {
   }
 
 
-  // modes
-
+  // Modes
   const [modeMenu, setModeMenu] = useState(false)
 
   const toggleModeMenu = (e: any) => {
@@ -114,13 +100,34 @@ function index() {
   }
 
 
-  // Keyboard Shortcuts
+  // MenuInfo Modal
+  const [keyModal, setKeyModal] = useState(false)
+  const [aboutModal, setAboutModal] = useState(false)
 
-  const [keyShorts, setKeyShorts] = useState(false)
-
-  const toggleKeyShorts = () => {
-    setKeyShorts(!keyShorts)
+  const toggleKeyModal = () => {
+    setOverlay(!overlay)
+    setKeyModal(!keyModal)
   }
+
+  const toggleAboutModal = () => {
+    setOverlay(!overlay)
+    setAboutModal(!aboutModal)
+  }
+
+
+  // Overlay
+  const [overlay, setOverlay] = useState(false)
+  const handleOverlayClick = (e: any) => {
+    if (e.target === e.currentTarget) {
+      
+      if (keyModal) {
+        toggleKeyModal();
+      }
+      if (aboutModal) {
+        toggleAboutModal();
+      }
+    }
+  };
 
 
   return (
@@ -131,21 +138,13 @@ function index() {
       </div>
       
       <div id="main" className="w-full bg-white flex flex-col items-center justify-between">
-        {infoMenu ? (
-          <div id="info-menu" className="absolute h-24 w-48 border border-gray top-20 right-16 rounded-lg">
-            <div id="about-tab" className="w-full h-1/2 px-4 flex justify-start items-center gap-2 hover:bg-light-green cursor-pointer">
-              <IconAbout />
-              <div className="text-sm">About this project</div>
-            </div>
-            <div id="keyboard-tab" className="w-full h-1/2 px-4 flex justify-start items-center gap-2 hover:bg-light-green cursor-pointer">
-              <IconKeyboard />
-              <div className="text-sm" onClick={toggleKeyShorts}>Keyboard shortcuts</div>
-            </div>
-          </div>
-        ) : (
-          null
-        )}
-        {keyShorts ? ( <KeyShorts /> ) : null }
+
+        {overlay ? ( <Overlay onClick={handleOverlayClick} /> ) : null }
+        {infoMenu ? ( <MenuInfo toggleAboutModal={toggleAboutModal} toggleKeyModal={toggleKeyModal} /> ) : ( null )}
+        {keyModal ? ( <KeyModal /> ) : null }
+        {aboutModal ? ( <AboutModal /> ) : null }
+
+
         <div id="button-info" className={"absolute top-4 right-4"}>
           <ButtonIcon icon={IconInfo} text="Click for more Info" onClick={toggleInfoMenu}/>
         </div>
@@ -164,44 +163,8 @@ function index() {
               null
             )}
           </div>
-          <div id="mode-switch" data-isOn={mode} className="relative mt-8 w-1/3 h-14 flex bg-light-green cursor-pointer rounded-2xl">
-            <motion.div 
-            className="absolute z-10 w-1/3 h-full p-1"
-            layout
-            transition={spring}
-            animate={{ 
-              x: mode === "one" 
-                  ? '0%' 
-                  : mode === "two"
-                      ? '100%'
-                      : '200%',
-            }} 
-          >
-            <div id="white-ball" className="w-full h-full bg-white rounded-2xl"></div>
-          </motion.div>
-            <div 
-              onClick={() => toggleSwitch("one")}
-              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
-              >
-                <div><IconModeBug /></div>
-                <div>Bug</div>
-              </div>
-            <div 
-              onClick={() => toggleSwitch("two")}
-              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
-            >
-              <div><IconModeExplain /></div>
-              <div>Explain</div>
-            </div>
-            <div 
-              onClick={() => toggleSwitch("three")}
-              className="selected-mode flex-1 flex z-10 justify-center items-center gap-2"
-            >
-              <div><IconModeRefractor /></div>
-              <div>Refractor</div>
-            </div>
-          </div>
-        </div>
+        <ModeSwitch mode={mode} toggleSwitch={toggleSwitch}/>
+      </div>
         {output ? (
             <div 
             id="output-container"
@@ -227,57 +190,8 @@ function index() {
             </div>
           </div>
         ) : null }
-        <div id="prompt-container" className="mb-12 w-full flex justify-center">
-          <form 
-            id="prompt-bar" 
-            className="bg-light-green px-6 py-4 w-3/5 flex justify-between items-center rounded-2xl"
-            onSubmit={handleSubmit}
-          >
-            <textarea 
-              name="prompt" 
-              id="prompt-block"
-              value={input}
-              onChange={handleInput}
-              className="bg-transparent w-full min-h-[16px] max-h-[200px] h-6 outline-none resize-none"
-              placeholder="Enter a prompt ..."
-            ></textarea>
-            <button 
-              id="submit-btn"
-              type="submit"
-              className="h-4 w-4"
-            >
-              <IconArrow />
-            </button>
-          </form>
-        </div>
+        <PromptForm input={input} handleInput={handleInput} handleSubmit={handleSubmit}/>
       </div>
-
-
-
-      {/* <div className="input-block">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="prompt"></label>
-          <input 
-            type="text" 
-            name="prompt" 
-            value={input}
-            onChange={handleInput}
-          />
-          <p>{input}</p>
-          <button 
-            className="submit-btn"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-      <h1 className="text-5xl text-blue-700">Hi</h1>
-      <div className="result">
-        <p className="result-text">
-          {mes}
-        </p>
-      </div> */}
     </div>
   )
 }
